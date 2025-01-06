@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Alexander Martinez – Systems Engineer | IT Solutions | Web Development | Cloud Solutions">
+    <meta name="keywords" content="Systems Engineer, IT Solutions, Web Development, Cloud Solutions, Alexander Martinez">
+    <meta property="og:title" content="Alexander Martinez – Systems Engineer">
+    <meta property="og:description" content="Innovative IT and web development solutions.">
+    <meta property="og:image" content="https://example.com/images/preview.jpg">
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:type" content="website">
+    <title>Alexander Martinez – Systems Engineer</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            transition: overflow 0.3s ease;
+            margin: 0 auto;
+
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #4e73df;
+            padding-top: 50px;
+            z-index: 1000;
+            box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            display: block;
+            font-size: 1.1rem;
+            transition: background  0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #2c55a8;
+        }
+
+        .sidebar .navbar-brand {
+            color: white;
+            font-size: 1.5rem;
+            padding-left: 15px;
+        }
+
+        .hamburger {
+            display: block;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: grey;
+            position: relative;
+            top: 25px;
+            left: 35px;
+            z-index: 1001;
+            
+
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding: 30px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.active {
+            background: rgba(0, 0, 0, 0.3); /* Overlay effect */
+            pointer-events: none; /* Prevent interaction with content */
+        }
+
+        header {
+            background-color: #4e73df;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .cta-button{
+            background-color: rgb(195, 191, 191);
+            color: #4e73df;
+            padding: 10px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 15px;
+            margin:10px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        .cta-button-alone {
+            background-color: #fff;
+            color: #4e73df;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 15px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .cta-button:hover {
+            background-color: #ece6e6;
+        }
+        .cta-button-alone:hover {
+            background-color: #e5e1e1;
+        }
+        
+        .about-section {
+            background-color: #fff;
+            padding: 30px 10%;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        .about-section h2 {
+            font-size: 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            color: #4e73df;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin: 20px 0;
+        }
+
+        .about-content img {
+            width: 120px;
+            border-radius: 50%;
+            margin-top: 20px;
+        }
+
+        .services-section {
+            padding: 80px 10%;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+
+        .services-section h2 {
+            font-size: 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            color: #4e73df;
+            margin-bottom: 0px;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .service-item {
+            background-color: #fff;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-item i {
+            font-size: 2.5rem;
+            color: #4e73df;
+        }
+
+        .service-item h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-top: 20px;
+        }
+
+        .service-item p {
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        .calendly-width{
+            width: 70%;
+            margin: 10px 10px;
+            padding: 10px 10px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        footer {
+            background-color: #4e73df;
+            color: white;
+            text-align: center;
+            padding: 30px 10%;
+        }
+
+        footer h4 {
+            font-size: 1.2rem;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+       
+
+        @media (max-width: 768px) {
+            .services-section {
+                padding: 30px 5%;
+            }
+        }
+        
+        nav ul {
+  list-style-type: none; /* Hides the bullets */
+  
+}
+
+    </style>
+</head>
+
+<body>
+
+    <div class="hamburger" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+    </div>
+    
+    <div class="sidebar">
+        
+        <!-- Main Navigation Bar (Responsive and SEO-Optimized) -->
+<nav>
+    <ul>
+      <li><a href="#home" title="Home - IT Support and Web Development Portfolio">Home</a></li>
+      <li><a href="#about" title="About Me - IT Support and Web Developer">About Me</a></li>
+      <li><a href="#service1" title="IT Support Services - Troubleshooting and Solutions">Remote Tech Support</a></li>
+      <li><a href="#service2" title="Web Development - Custom Websites and UI/UX">Web Development</a></li>
+      <li><a href="#service3" title="Portfolio - Showcase of IT and Development Projects">Portfolio</a></li>
+    </ul>
+  </nav>
+  
+    </div>
+
+    <div class="main-content">
+
+        <header id="home">
+            <h1>Systems Engineer</h1>
+            <p>Optimizing IT Systems and Delivering Innovative Solutions</p>
+            <button class="cta-button-alone"><a href="#service1" style="color: #4e73df; text-decoration: none;">Explore My Services</a></button>
+        </header>
+
+        <section class="about-section" id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <img src="images/alexPhoto.jpg" alt="Portrait of Alexander Martinez" loading="lazy">
+                <p>Alexander Pineda Martinez <br/><br/> Passionate <strong> systems engineer </strong>with over 5 years of experience delivering seamless IT solutions. I specialize in MDM solutions, cloud technologies, database management, and automation. Let's collaborate to enhance and optimize your IT infrastructure, driving seamless performance and long-term success.</p>
+                <button class="cta-button-alone"><a href="https://calendly.com/ettoro/30min" style="color: #4e73df; text-decoration: dotted;">Book a Free Consultation</a></button>
+            </div>
+        </section>
+
+        <section class="services-section">
+            <h2>My Services</h2>
+
+            <div class="services">
+                <div class="service-item" id="service1">
+                    <i class="fas fa-cogs"></i>
+                    <h3> Remote Support</h3>
+                    <p>Fixing errors and performance issues for Windows, Mac systems.</p>
+                    <button class="cta-button" aria-label="Learn more about IT support">
+                        <a href="remote-tech-support.html" style="color: white; text-decoration: none;">See more.</a>
+                    </button>
+                </div>
+                <div class="service-item" id="service2">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Web Development</h3>
+                    <p>Modern, responsive websites tailored to your needs.</p>
+                    <button class="cta-button" aria-label="Learn more about cloud solutions">
+                        <a href="web-development.html" style="color: white; text-decoration: none;">See more.</a>
+                    </button>
+                </div>
+                <div class="service-item" id="service3">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Portfolio</h3>
+                    <p>Explore my portfolio to see projects about IT support and front-end development.</p>
+                    <button class="cta-button" aria-label="Learn more about cloud solutions">
+                        <a href="porfolio.html" style="color: white; text-decoration: none;">See more.</a>
+                    </button>
+                </div>
+                
+                
+                
+                
+            </div>
+        </section>
+
+    </div>
+   <!-- Calendly badge widget begin -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/ettoro/30min?hide_event_type_details=1&hide_gdpr_banner=1', text: 'Book a free consultation ', color: '#4e7fee', textColor: '#ffffff' }); }</script>
+<!-- Calendly badge widget end -->
+
+<footer>
+    <h4>Alexander Martinez</h4>
+    <p>Follow me on:</p>
+    <div>
+        <a href="https://linkedin.com/in/alexmartinez" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin fa-2x socialmedia" style="color: white; margin-right: 15px;"></i>
+        </a>
+        <a href="https://github.com/alexmartinez" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github fa-2x socialmedia" style="color: white; margin-right: 15px;"></i>
+        </a>
+        <a href="https://twitter.com/alexmartinez" target="_blank" aria-label="Twitter">
+            <i class="fab fa-twitter fa-2x socialmedia" style="color: white; margin-right: 15px;"></i>
+        </a>
+        <a href="https://facebook.com/alexmartinez" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook fa-2x socialmedia" style="color: white; margin-right: 15px;"></i>
+        </a>
+    </div>
+</footer>
+
+    <script>
+       const hamburger = document.querySelector('.hamburger');
+const sidebar = document.querySelector('.sidebar');
+const mainContent = document.querySelector('.main-content');
+const body = document.body;
+const sidebarLinks = document.querySelectorAll('.sidebar a');
+
+hamburger.addEventListener('click', function () {
+    const isActive = sidebar.classList.toggle('active');
+    mainContent.classList.toggle('active');
+    body.style.overflow = isActive ? 'hidden' : 'auto'; // Prevent body scroll
+    hamburger.setAttribute('aria-expanded', isActive);
+});
+
+// Close sidebar when clicking outside of it
+mainContent.addEventListener('click', function () {
+    if (sidebar.classList.contains('active')) {
+        closeSidebar();
+    }
+});
+
+// Close sidebar when a link is clicked
+sidebarLinks.forEach(link => {
+    link.addEventListener('click', function () {
+        closeSidebar();
+    });
+});
+
+function closeSidebar() {
+    sidebar.classList.remove('active');
+    mainContent.classList.remove('active');
+    body.style.overflow = 'auto';
+    hamburger.setAttribute('aria-expanded', 'false');
+}
+
+    </script>
+    
+</body>
+
+</html>
